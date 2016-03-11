@@ -1,0 +1,24 @@
+- name: install vim
+  apt:
+    name: vim
+    state: present
+
+- name: create autoload directory
+  file:
+    path: /home/{{ ansible_ssh_user }}/.vim/autoload
+    state: directory
+
+- name: install vim-plug
+  copy:
+    src: plug.vim
+    dest: /home/{{ ansible_ssh_user }}/.vim/autoload/plug.vim
+    owner: '{{ ansible_ssh_user }}'
+    group: '{{ ansible_ssh_user }}'
+
+- name: create custom config
+  copy:
+    src: vimrc
+    dest: /home/{{ ansible_ssh_user }}/.vimrc
+    owner: '{{ ansible_ssh_user }}'
+    group: '{{ ansible_ssh_user }}'
+

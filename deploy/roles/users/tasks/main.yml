@@ -1,0 +1,13 @@
+- name: add ssh keys
+  authorized_key:
+    user: '{{ ansible_ssh_user }}'
+    key: https://github.com/{{ item }}.keys
+  with_items:
+    - '{{ github_usernames }}'
+
+- name: disable password authentication
+  lineinfile:
+    dest: /etc/ssh/sshd_config
+    regexp: PasswordAuthentication
+    line: PasswordAuthentication=no
+  notify: restart sshd

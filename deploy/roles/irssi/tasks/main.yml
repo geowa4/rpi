@@ -1,0 +1,25 @@
+- name: install irssi
+  apt:
+    name: irssi
+    state: present
+
+- name: create irssi directories
+  file:
+    path: /home/{{ ansible_ssh_user }}/.irssi/scripts/autorun
+    owner: '{{ ansible_ssh_user }}'
+    state: directory
+
+- name: configure irssi
+  template:
+    src: config
+    dest: /home/{{ ansible_ssh_user }}/.irssi/config
+
+- name: add irssi scripts
+  copy:
+    src: '{{ item }}.pl'
+    dest: /home/{{ ansible_ssh_user }}/.irssi/scripts/autorun/{{ item }}.pl
+  with_items:
+    - hilightwin
+    - trackbar
+    - usercount
+

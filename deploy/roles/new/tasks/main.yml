@@ -1,0 +1,19 @@
+- name: add overlay kernel module
+  lineinfile:
+    dest: /etc/modules
+    line: overlay
+
+- name: configure wifi
+  template:
+    src: wifi.conf
+    dest: /etc/wpa_supplicant/wpa_supplicant.conf
+
+- name: configure network drive
+  lineinfile:
+    dest: /etc/fstab
+    line: //192.168.0.1/volume9 /media/networkshare cifs guest,uid=1000,gid=1000,iocharset=utf8 0 0
+
+- name: reminder to run raspi-config
+  debug:
+    msg: don't forget to run raspi-config on the pi!
+

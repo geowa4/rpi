@@ -1,0 +1,11 @@
+- name: configure useful foundation
+  hosts: all
+  user: pi
+  become: yes
+  roles:
+    - base
+    - docker
+    - tmux
+    - vim
+    - irssi
+

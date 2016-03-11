@@ -1,0 +1,8 @@
+- name: initial setup for new pi
+  hosts: all
+  user: pi
+  become: yes
+  roles:
+    - users
+    - new
+

@@ -1,0 +1,113 @@
+" vim:foldmethod=marker:foldlevel=0
+" Plugins {{{
+call plug#begin('~/.vim/plugged')
+Plug 'bling/vim-airline'
+Plug 'unblevable/quick-scope'
+Plug 'mileszs/ack.vim'
+Plug 'tpope/vim-vinegar'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-repeat'
+Plug 'benekastah/neomake'
+Plug 'chase/vim-ansible-yaml'
+Plug 'ktonga/vim-follow-my-lead'
+Plug 'terryma/vim-expand-region'
+Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer' }
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'mhinz/vim-startify'
+call plug#end()
+" }}}
+
+" Aesthetics {{{
+set relativenumber
+set number
+set cursorline
+set cursorcolumn
+set cc=80
+set ruler
+set splitbelow
+set splitright
+syntax on
+nnoremap <silent> <Leader>+ :exe "resize " . (winheight(0) * 3/2)<CR>
+nnoremap <silent> <Leader>- :exe "resize " . (winheight(0) * 2/3)<CR>
+nnoremap <silent> <Leader>> :exe "vertical resize " . (winwidth(0) * 3/2)<CR>
+nnoremap <silent> <Leader>< :exe "vertical resize " . (winwidth(0) * 2/3)<CR>
+nnoremap <silent> <Leader>t :split<CR> :terminal<CR>
+set t_Co=256
+set background=dark
+set laststatus=2
+let g:airline_powerline_fonts = 0
+let g:airline_left_sep=''
+let g:airline_right_sep=''
+let g:airline_detect_modified=1
+let g:airline_detect_paste=1
+" }}}
+
+" Movements {{{
+nnoremap <C-E> 3<C-E>
+nnoremap <C-Y> 3<C-Y>
+nnoremap H H3j
+nnoremap L Lk
+vmap v <Plug>(expand_region_expand)
+vmap <C-v> <Plug>(expand_region_shrink)
+vnoremap <silent> y y`]
+vnoremap <silent> p p`]
+nnoremap <silent> p p`]
+noremap gV `[v`]
+" }}}
+
+" Shortcuts {{{
+nmap <C-n><C-n> :set invnumber<CR>
+nmap <C-p> :FZF<CR>
+let mapleader = "\<Space>"
+let maplocalleader = "\\"
+nnoremap <Leader>sv :source $MYVIMRC<CR>
+nnoremap <Leader>o :FZF<CR>
+nnoremap <Leader>w :w<CR>
+nnoremap <Leader>q :q<CR>
+nnoremap <Leader>Q :qall<CR>
+nnoremap <Leader>x :x<CR>
+nnoremap <Leader>p <C-w>w
+nnoremap <Leader>b :tabnew<CR>:Explore<CR>
+nnoremap <Leader>i :PlugInstall<CR>
+nnoremap <Leader>u :PlugUpdate<CR>
+nnoremap <Leader>n :noh<CR>
+nnoremap <Leader>% :vsplit .<CR>
+nnoremap <Leader>" :split .<CR>
+map q: :q
+cmap w!! w !sudo tee % >/dev/null
+" }}}
+
+" System Integrations {{{
+set noswapfile
+set nobackup
+set nowritebackup
+set autoread
+" }}}
+
+" Utilities {{{
+set viminfo='10,\"100,:20,%
+autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+" }}}
+
+" File {{{
+filetype plugin indent on
+set shiftwidth=2
+set softtabstop=2
+set tabstop=2
+set expandtab
+set ignorecase
+set smartcase
+set foldenable
+set foldlevelstart=10
+set foldnestmax=10
+set foldmethod=indent
+autocmd FileType make set noexpandtab nosta
+autocmd BufWritePost * Neomake
+autocmd BufReadPost * Neomake
+augroup VimReload
+  autocmd!
+  autocmd BufWritePost  $MYVIMRC  source $MYVIMRC
+augroup END
+" }}}
+

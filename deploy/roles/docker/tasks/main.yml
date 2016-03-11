@@ -1,0 +1,18 @@
+- name: install https transport
+  apt: name=apt-transport-https
+
+- name: add hypriot key
+  apt_key: url=https://packagecloud.io/gpg.key
+
+- name: add hypriot source
+  apt_repository: repo='deb https://packagecloud.io/Hypriot/Schatzkiste/debian/ wheezy main'
+
+- name: install docker
+  apt: name=docker-hypriot update_cache=yes
+
+- name: enable docker
+  service: name=docker enabled=yes
+
+- name: start docker
+  service: name=docker state=started
+
