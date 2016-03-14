@@ -11,13 +11,6 @@ This repository assumes the use of OS X, but converting should be easy.
 
 ## Booting the Pi
 
-Before we can do anything, we need to get an SD card with Raspbian Lite on it.
-With a new 16GB card, format it to FAT32.
-To do this, I used SDFormatter (`brew cask install sdformatter`) to overwrite the whole thing.
-I could use the command line, but this is tool is too easy.
-Once the card is formatted, run `./flash https://downloads.raspberrypi.org/raspbian_lite_latest`.
-Now, you're ready to boot your Raspberry Pi.
-
 Before I could do anything, I needed to get an SD card with Raspbian Lite on it.
 I took a new 16GB card and formatted it to FAT32.
 To do this, I used SDFormatter (`brew cask install sdformatter`) to overwrite the whole thing.
