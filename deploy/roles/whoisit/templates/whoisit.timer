@@ -1,0 +1,10 @@
+[Unit]
+Description=%p
+
+[Timer]
+OnCalendar=hourly
+Persistent=yes
+Unit=%p.service
+
+[Install]
+WantedBy=multi-user.target

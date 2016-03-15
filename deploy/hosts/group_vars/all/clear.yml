@@ -5,3 +5,5 @@ github_usernames:
 # wifi_ssd: foo
 # wifi_password: bar
 # freenode_password: baz
+# ifttt_maker_key: quux
+# bluetooth_addresses: []

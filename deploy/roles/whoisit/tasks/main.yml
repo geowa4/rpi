@@ -1,0 +1,25 @@
+- name: define whoisit service
+  template:
+    src: whoisit.service
+    dest: /etc/systemd/system/whoisit.service
+  notify:
+    - reload systemd
+
+- name: enable whoisit service
+  service:
+    name: whoisit.service
+    enabled: yes
+
+- name: define whoisit timer
+  template:
+    src: whoisit.timer
+    dest: /etc/systemd/system/whoisit.timer
+  notify:
+    - reload systemd
+
+- name: start whoisit timer
+  service:
+    name: whoisit.timer
+    enabled: yes
+    state: started
+

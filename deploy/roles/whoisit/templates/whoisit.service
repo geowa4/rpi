@@ -1,0 +1,18 @@
+[Unit]
+Description=%p
+
+[Service]
+Type=oneshot
+RemainAfterExit=no
+EnvironmentFile=/etc/environment
+ExecStartPre=-/usr/bin/docker kill %p
+ExecStartPre=-/usr/bin/docker rm %p
+ExecStart=/usr/bin/docker run \
+  --name %p \
+  --net host \
+  geowa4/rpi-whoisit \
+  --ifttt {{ ifttt_maker_key }} \
+  {% for address in bluetooth_addresses %}--address {{ address }} {% endfor %}
+
+[Install]
+WantedBy=multi-user.target
