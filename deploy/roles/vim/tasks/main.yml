@@ -1,17 +1,30 @@
-- name: install vim
+- name: install vim and plugin dependencies
   apt:
-    name: vim
+    name: '{{ item }}'
     state: present
+  with_items:
+    - vim
+    - ruby
+    - cmake
 
 - name: create autoload directory
   file:
     path: /home/{{ ansible_ssh_user }}/.vim/autoload
     state: directory
+    owner: '{{ ansible_ssh_user }}'
+    group: '{{ ansible_ssh_user }}'
 
 - name: install vim-plug
   copy:
     src: plug.vim
     dest: /home/{{ ansible_ssh_user }}/.vim/autoload/plug.vim
+    owner: '{{ ansible_ssh_user }}'
+    group: '{{ ansible_ssh_user }}'
+
+- name: create plugin directory
+  file:
+    path: /home/{{ ansible_ssh_user }}/.vim/plugged
+    state: directory
     owner: '{{ ansible_ssh_user }}'
     group: '{{ ansible_ssh_user }}'
 
